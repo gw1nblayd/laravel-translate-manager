@@ -15,19 +15,20 @@
         "translates view changer"
     ],
     "require": {
-        "illuminate/support": "^9",
-        "illuminate/events": "^9",
-        "illuminate/database": "^9",
-        "illuminate/routing": "^9",
-        "illuminate/view": "^9",
+        "php": "^8.1",
         "doctrine/dbal": "^3.3"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0.0"
+        "orchestra/testbench": "^7.4"
     },
     "autoload": {
         "psr-4": {
-            "Gw1nblayd\\LaravelTranslateManager\\": "src/app"
+            "Gw1nblayd\\TranslateManager\\": "src/app"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gw1nblayd\\TranslateManager\\Tests\\": "./tests"
         }
     },
     "minimum-stability": "dev",
@@ -39,8 +40,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MasterRO\\MailViewer\\Providers\\MailViewerServiceProvider"
-            ]
+                "Gw1nblayd\\TranslateManager\\Providers\\TranslateManagerProvider"
+            ],
+            "aliases": {
+                "Tm": "Gw1nblayd\\TranslateManager\\Facades\\Tm"
+            }
         }
     }
 }
