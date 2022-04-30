@@ -9,7 +9,7 @@ class TranslateManagerController extends Controller
     public function index()
     {
 //        Tm::combineFiles();
-        Tm::splitFiles();
+//        Tm::splitFiles();
 
         return view('translate-manager::index');
     }

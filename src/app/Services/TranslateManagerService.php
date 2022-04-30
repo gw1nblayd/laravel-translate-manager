@@ -17,15 +17,19 @@ class TranslateManagerService
 
     protected Collection $languages;
 
-    protected array $editableFiles;
-
     protected bool $isFlat = true;
+
+    protected string $singleFileName;
+
+    private array $multiFileNames;
 
     public function __construct()
     {
         $this->filesystem = new Filesystem();
         $this->languages = new Collection();
-        $this->editableFiles = config('translate-manager.editable_files');
+
+        $this->singleFileName = config('translate-manager.single_file_name');
+        $this->multiFileNames = config('translate-manager.multi_file_names');
 
         $this->loadAppLanguages();
     }
@@ -53,7 +57,7 @@ class TranslateManagerService
     {
         $this->isFlat = $isFlat;
 
-        $fileForTranslates = config('translate-manager.merged_translate_file_name');
+        $fileForTranslates = $this->multiFileNames;
 
         foreach ($this->languages as $language) {
             $translates = $this->getTranslatesArrayFromEditableFiles($language);

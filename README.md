@@ -31,8 +31,6 @@ php artisan vendor:publish --tag=translate-manager
 ```php
 <?php
 
-use Gw1nblayd\TranslateManager\Http\Controllers\TranslateManagerController;
-
 return [
     /*
     |--------------------------------------------------------------------------

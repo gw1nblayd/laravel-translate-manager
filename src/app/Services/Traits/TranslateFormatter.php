@@ -11,7 +11,7 @@ trait TranslateFormatter
     {
         $translates = [];
 
-        foreach ($this->editableFiles as $file) {
+        foreach ($this->singleFileName as $file) {
             $filePath = lang_path("$lang/$file.php");
             $translate = $this->filesystem->exists($filePath) ? require $filePath : null;
 
@@ -47,7 +47,7 @@ trait TranslateFormatter
 
     protected function getTranslatesArrayFromSingleTranslatesFile(string $lang): array
     {
-        $file = config('translate-manager.merged_translate_file_name');
+        $file = $this->singleFileName;
         $filePath = lang_path("$lang/$file.php");
         $translates = $this->filesystem->exists($filePath) ? require $filePath : null;
 
