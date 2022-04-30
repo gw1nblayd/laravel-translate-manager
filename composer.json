@@ -1,0 +1,46 @@
+{
+    "name": "gw1nblayd/laravel-translate-manager",
+    "description": "Laravel package for managing your translates and changing it on app interface",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kirill Zhelebovskiy",
+            "email": "kirhoc0898@gmail.com"
+        }
+    ],
+    "keywords": [
+        "laravel",
+        "translates",
+        "translates manager",
+        "translates view changer"
+    ],
+    "require": {
+        "illuminate/support": "^9",
+        "illuminate/events": "^9",
+        "illuminate/database": "^9",
+        "illuminate/routing": "^9",
+        "illuminate/view": "^9",
+        "doctrine/dbal": "^3.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gw1nblayd\\LaravelTranslateManager\\": "src/app"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MasterRO\\MailViewer\\Providers\\MailViewerServiceProvider"
+            ]
+        }
+    }
+}
