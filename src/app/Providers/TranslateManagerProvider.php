@@ -46,5 +46,9 @@ class TranslateManagerProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../config/translate-manager.php' => config_path('translate-manager.php'),
         ], 'translate-manager');
+
+        $this->publishes([
+            __DIR__ . '/../../public/' => public_path('vendor/translate-manager'),
+        ], ['translate-manager', 'laravel-assets']);
     }
 }

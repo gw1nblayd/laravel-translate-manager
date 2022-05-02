@@ -4,11 +4,13 @@
 
 There is package for managing your translations files from web interface
 
+`Note: Do not support json localisation, it will be later.`
+
 ## Version Compatibility
 
-| Laravel     | Translate Manager |
-|:------------|:------------------|
-| 9.x         | 1.x.x             |
+| PHP   | Laravel     | Translate Manager |
+|-------|:------------|:------------------|
+| 8.1.x | 9.x         | 1.x.x             |
 
 ## Installation
 
@@ -27,6 +29,8 @@ php artisan vendor:publish --tag=translate-manager
 ```
 
 ## Config
+
+### translate-manager.php
 
 ```php
 <?php

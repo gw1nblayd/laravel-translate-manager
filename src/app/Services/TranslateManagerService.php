@@ -4,6 +4,7 @@ namespace Gw1nblayd\TranslateManager\Services;
 
 use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Gw1nblayd\TranslateManager\Services\Traits\TranslateFormatter;
@@ -34,6 +35,47 @@ class TranslateManagerService
         $this->loadAppLanguages();
     }
 
+    public function getLanguages(): Collection
+    {
+        return $this->languages;
+    }
+
+    public function getTranslates(string $lang): array
+    {
+        $translates = [];
+
+        foreach ($this->multiFileNames as $file) {
+            if (isset($this->getTranslatesForFile($lang, $file)[$file])) {
+                $translates[$file] = $this->getTranslatesForFile($lang, $file)[$file];
+            }
+        }
+
+        return $translates;
+    }
+
+    public function getTranslatesForFile(string $lang, string $fileName): array
+    {
+        $translates = [];
+
+        $filePath = lang_path("$lang/$fileName.php");
+        $translate = $this->filesystem->exists($filePath) ? require $filePath : null;
+
+        if (!$translate) {
+            return [];
+        }
+
+        $translates[$fileName] = Arr::dot($translate);
+
+        foreach ($translates[$fileName] as $key => $translate) {
+            if (is_array($translate)) {
+                unset($translates[$fileName][$key]);
+            }
+        }
+
+
+        return $translates;
+    }
+
     public function makeNewLocale(string $lang): void
     {
         if ($this->languages->contains($lang)) {
@@ -47,8 +89,8 @@ class TranslateManagerService
 
     public function diff(string $lang, string $targetLang): array
     {
-        $langArray = $this->getTranslatesArrayFromEditableFiles($lang);
-        $targetLangArray = $this->getTranslatesArrayFromEditableFiles($targetLang);
+        $langArray = array_keys($this->getTranslatesArrayFromEditableFiles($lang));
+        $targetLangArray = array_keys($this->getTranslatesArrayFromEditableFiles($targetLang));
 
         return array_diff($langArray, $targetLangArray);
     }
@@ -57,7 +99,7 @@ class TranslateManagerService
     {
         $this->isFlat = $isFlat;
 
-        $fileForTranslates = $this->multiFileNames;
+        $fileForTranslates = $this->singleFileName;
 
         foreach ($this->languages as $language) {
             $translates = $this->getTranslatesArrayFromEditableFiles($language);
@@ -74,12 +116,17 @@ class TranslateManagerService
         foreach ($this->languages as $language) {
             $translates = $this->getTranslatesArrayFromSingleTranslatesFile($language);
 
-            foreach ($translates as $fileName => $translate) {
-                $this->filesystem->put(
-                    lang_path("{$language}/{$fileName}.php"),
-                    $this->getFileContent($translate)
-                );
-            }
+            $this->putDataToFile($translates, $language);
+        }
+    }
+
+    public function putDataToFile(array $translates, string $language): void
+    {
+        foreach ($translates as $fileName => $translate) {
+            $this->filesystem->put(
+                lang_path("{$language}/{$fileName}.php"),
+                $this->getFileContent(Arr::undot($translate))
+            );
         }
     }
 

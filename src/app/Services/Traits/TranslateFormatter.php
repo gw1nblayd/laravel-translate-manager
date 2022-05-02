@@ -7,11 +7,13 @@ use Illuminate\Support\Str;
 
 trait TranslateFormatter
 {
-    public function getTranslatesArrayFromEditableFiles($lang): array
+    public function getTranslatesArrayFromEditableFiles($lang, bool $isFlat = null): array
     {
+        $this->isFlat = $isFlat ?? $this->isFlat;
+
         $translates = [];
 
-        foreach ($this->singleFileName as $file) {
+        foreach ($this->multiFileNames as $file) {
             $filePath = lang_path("$lang/$file.php");
             $translate = $this->filesystem->exists($filePath) ? require $filePath : null;
 
@@ -45,7 +47,7 @@ trait TranslateFormatter
         return $translates;
     }
 
-    protected function getTranslatesArrayFromSingleTranslatesFile(string $lang): array
+    public function getTranslatesArrayFromSingleTranslatesFile(string $lang): array
     {
         $file = $this->singleFileName;
         $filePath = lang_path("$lang/$file.php");
@@ -67,8 +69,8 @@ trait TranslateFormatter
             }
 
             $blockKey = Str::of($block)->explode('.')->first();
-            $key = Str::of($block)->replace("{$blockKey}.", '');
-            $translatesByKeys[$blockKey][$key->value()] = $item;
+            $key = Str::of($block)->replace("{$blockKey}.", '')->value();
+            $translatesByKeys[$blockKey][$key] = $item;
         }
 
         return $translatesByKeys;

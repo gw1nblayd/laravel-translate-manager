@@ -10,4 +10,8 @@ Route::group([
     'controller' => TranslateManagerController::class,
 ], function () {
     Route::get('/', 'index')->name('index');
+
+    Route::get('/languages', 'languagesList');
+    Route::get('/translates/{lang}', 'translatesList');
+    Route::put('/translates/{lang}', 'translatesUpdate');
 });
