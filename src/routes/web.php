@@ -14,4 +14,5 @@ Route::group([
     Route::get('/languages', 'languagesList');
     Route::get('/translates/{lang}', 'translatesList');
     Route::put('/translates/{lang}', 'translatesUpdate');
+    Route::delete('/translates/{lang}/{block}/{key}', 'translatesDestroy');
 });

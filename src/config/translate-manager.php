@@ -7,11 +7,11 @@ return [
     |--------------------------------------------------------------------------
     */
     'title'             => env('TRANSLATE_MANAGER_TITLE', 'Translate manager'),
-    'package_lang'      => env('TRANSLATE_MANAGER_LANG', 'en'),
+    'package_lang'      => 'en',
 
     /*
     |--------------------------------------------------------------------------
-    | Route Settings
+    | Routes Settings
     |--------------------------------------------------------------------------
     */
     'routes_prefix'     => 'translate-manager',
@@ -20,14 +20,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Localisation file settings
+    | You can provide the list of translate file which you would like to manage
+    |
+    | Note:
+    |    if you leave this empty, by default it will use all your translate files
     |--------------------------------------------------------------------------
     */
-    'single_file_name'  => 'translates',
-    'multi_file_names'  => [
-        'auth',
-        'pagination',
-        'passwords',
-        'validation',
+    'translate_files'   => [
+        // 'auth'
     ],
 ];

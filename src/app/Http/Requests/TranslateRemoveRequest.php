@@ -4,7 +4,7 @@ namespace Gw1nblayd\TranslateManager\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TranslateRequest extends FormRequest
+class TranslateRemoveRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,10 +14,8 @@ class TranslateRequest extends FormRequest
     public function rules()
     {
         return [
-            'lang'  => 'required|string',
             'block' => 'required|string',
             'key'   => 'required|string',
-            'value' => 'required|string',
         ];
     }
 }

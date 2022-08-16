@@ -2,45 +2,52 @@
 
 namespace Gw1nblayd\TranslateManager\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Gw1nblayd\TranslateManager\Facades\Tm;
-use Gw1nblayd\TranslateManager\Http\Requests\TranslateRequest;
+use Gw1nblayd\TranslateManager\Http\Requests\TranslateUpdateRequest;
 
 class TranslateManagerController extends Controller
 {
     public function index()
     {
+//        $t = Tm::manager()->getCachedTranslates('en');
+//        $tt = Tm::manager()->getTranslates('en');
+//
+//        dd($t, $tt);
+
+//        Tm::manager()->updateTranslate('en', 'admin_views', 'footer.copyright', 'test');
+
+//        dd(1);
         return view('translate-manager::index');
     }
 
     public function languagesList()
     {
         return response()->json(
-            Tm::getLanguages()
+            Tm::manager()->getLanguages()
         );
     }
 
     public function translatesList(string $lang)
     {
         return response()->json(
-            Tm::getTranslates($lang)
+            Tm::manager()->getTranslates($lang)
         );
     }
 
-    public function translatesUpdate(TranslateRequest $request)
+    public function translatesUpdate(TranslateUpdateRequest $request, string $lang)
     {
-        $lang = $request->input('lang');
-        $block = $request->input('block');
+        $fileName = $request->input('block');
         $key = $request->input('key');
         $value = $request->input('value');
 
-        $translates = Tm::getTranslatesForFile($lang, $block);
+        Tm::manager()->updateTranslate($lang, $fileName, $key, $value);
 
-        $translates[$block][$key] = $value;
+        return response()->json();
+    }
 
-        Tm::putDataToFile($translates, $lang);
-
-        sleep(3);
+    public function translatesDestroy(string $lang, string $block, string $key)
+    {
+        Tm::manager()->removeTranslate($lang, $block, $key);
 
         return response()->json();
     }

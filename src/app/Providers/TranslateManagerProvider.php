@@ -2,16 +2,19 @@
 
 namespace Gw1nblayd\TranslateManager\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Gw1nblayd\TranslateManager\Console\Commands\TranslateManagerDiff;
-use Gw1nblayd\TranslateManager\Console\Commands\TranslateManagerSplit;
-use Gw1nblayd\TranslateManager\Console\Commands\TranslateManagerCombine;
+use Gw1nblayd\TranslateManager\Events\TranslatesChanged;
+use Gw1nblayd\TranslateManager\Listeners\UpdateTranslatesCache;
+use Gw1nblayd\TranslateManager\Services\TranslateManagerService;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider;
+use Gw1nblayd\TranslateManager\Console\Commands\TranslateManagerInstall;
 use Gw1nblayd\TranslateManager\Console\Commands\TranslateManagerAddNewLang;
 
-class TranslateManagerProvider extends ServiceProvider
+class TranslateManagerProvider extends EventServiceProvider
 {
-    protected array $listen = [
-        //
+    protected $listen = [
+        TranslatesChanged::class => [
+            UpdateTranslatesCache::class,
+        ],
     ];
 
     public function register()
@@ -19,10 +22,8 @@ class TranslateManagerProvider extends ServiceProvider
         parent::register();
 
         $this->commands([
+            TranslateManagerInstall::class,
             TranslateManagerAddNewLang:: class,
-            TranslateManagerCombine::class,
-            TranslateManagerSplit::class,
-            TranslateManagerDiff::class,
         ]);
     }
 
@@ -39,6 +40,8 @@ class TranslateManagerProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'translate-manager');
 
         $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'translate-manager');
+
+        $this->app->singleton(TranslateManagerService::class);
     }
 
     protected function publish()

@@ -1,5 +1,6 @@
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
 
+[<img src="https://banners.beyondco.de/Translate%20Manager.png?theme=dark&packageManager=composer+require&packageName=gw1nblayd%2Flaravel-translate-manager&pattern=diagonalLines&style=style_1&description=Managing+translation+is+so+easy.&md=1&showWatermark=0&fontSize=150px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg" />](https://banners.beyondco.de/Translate%20Manager.png?theme=dark&packageManager=composer+require&packageName=gw1nblayd%2Flaravel-translate-manager&pattern=diagonalLines&style=style_1&description=Managing+translation+is+so+easy.&md=1&showWatermark=0&fontSize=150px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
 # Laravel Translate Manager
 
 There is package for managing your translations files from web interface

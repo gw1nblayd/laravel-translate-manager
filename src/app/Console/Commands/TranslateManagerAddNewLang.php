@@ -15,6 +15,5 @@ class TranslateManagerAddNewLang extends Command
     {
         $argument = $this->argument('lang');
 
-        Tm::makeNewLocale($argument);
     }
 }
