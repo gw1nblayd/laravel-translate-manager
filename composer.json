@@ -1,51 +1,51 @@
 {
-    "name": "gw1nblayd/laravel-translate-manager",
-    "description": "Laravel package for managing your translates and changing it on app interface",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Kirill Zhelebovskiy",
-            "email": "kirhoc0898@gmail.com"
-        }
-    ],
-    "keywords": [
-        "laravel",
-        "translates",
-        "translates manager",
-        "translates view changer"
-    ],
-    "require": {
-        "php": "^8.1",
-        "doctrine/dbal": "^3.3",
-        "ext-zend-opcache": "*"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^7.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Gw1nblayd\\TranslateManager\\": "src/app"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Gw1nblayd\\TranslateManager\\Tests\\": "./tests"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true,
-        "optimize-autoloader": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Gw1nblayd\\TranslateManager\\Providers\\TranslateManagerProvider"
-            ],
-            "aliases": {
-                "Tm": "Gw1nblayd\\TranslateManager\\Facades\\Tm"
-            }
-        }
+  "name": "gw1nblayd/laravel-translate-manager",
+  "description": "Laravel package for managing your translates and changing it on app interface",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kirill Zhelebovskiy",
+      "email": "kirhoc0898@gmail.com"
     }
+  ],
+  "keywords": [
+    "laravel",
+    "translates",
+    "translates manager",
+    "translates view changer"
+  ],
+  "require": {
+    "php": "^8.2",
+    "doctrine/dbal": "^3.3",
+    "ext-zend-opcache": "*"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Gw1nblayd\\TranslateManager\\": "src/app"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Gw1nblayd\\TranslateManager\\Tests\\": "./tests"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Gw1nblayd\\TranslateManager\\Providers\\TranslateManagerProvider"
+      ],
+      "aliases": {
+        "Tm": "Gw1nblayd\\TranslateManager\\Facades\\Tm"
+      }
+    }
+  }
 }
